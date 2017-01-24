@@ -6,13 +6,15 @@ import matplotlib.pyplot as plt
 
 # Percent change. Needed for plotting/analysis
 
-def f(first, second):
-  ans = (second - first) * 100. / first
+def f(first, second):    
+  ans = (second - first) * 100. / first    
   return ans
 
-def compute(array, output):
-  for n, item in enumerate(array):
-    np.append(output, f(array[n-1], array[n]))
+def compute(array):    
+  output = np.array([])    \
+  for n, item in enumerate(array):        
+    np.append(output, f(array[n-1], array[n]))    
+  else:        return outputx = np.random.normal(52, 12, 100)g = compute(x)
     
 AMZN = quandl.get("WIKI/AMZN")
 close = AMZN.loc[:, "Close"].tolist
@@ -24,7 +26,8 @@ compute(close, change)
 rsi = RSI(close)
 
 # matching up RSI to percent move next day
-rsi = rsi[14:] # get rid of NaN's
+rsi = rsi[14:-1] # get rid of NaN's
 change = change[15:]
 
+plt.scatter(rsi, change, color='g')
 
