@@ -3,3 +3,28 @@ from talib import RSI
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+
+# Percent change. Needed for plotting/analysis
+
+def f(first, second):
+  ans = (second - first) * 100. / first
+  return ans
+
+def compute(array, output):
+  for n, item in enumerate(array):
+    np.append(output, f(array[n-1], array[n]))
+    
+AMZN = quandl.get("WIKI/AMZN")
+close = AMZN.loc[:, "Close"].tolist
+close = np.array(close)
+
+change = np.array([])
+compute(close, change)
+
+rsi = RSI(close)
+
+# matching up RSI to percent move next day
+rsi = rsi[14:] # get rid of NaN's
+change = change[15:]
+
+
