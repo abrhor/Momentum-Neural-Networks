@@ -1,0 +1,18 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import quandl
+from talib import RSI
+
+AMZN = quandl.get("WIKI/AMZN")
+close = AMZN.loc[:, "Close"].tolist()
+close = np.array(close)
+rsi = RSI(close)
+rsi = rsi[14:] # removing the NaN's
+
+plt.hist(rsi, color='g')
+plt.xlabel("RSI")
+plt.ylabel("Frequency")
+plt.title("Distribution of RSI Over Life of AMZN")
+plt.show()
+
