@@ -11,10 +11,11 @@ def f(first, second):   
   return ans
 
 def compute(array):    
-  output = np.array([])    \
+  output = np.array([])   
   for n, item in enumerate(array):        
-    np.append(output, f(array[n-1], array[n]))    
-  else:        return outputx = np.random.normal(52, 12, 100)g = compute(x)
+    output = np.append(output, f(array[n-1], array[n]))    
+  else:        
+    return output
     
 AMZN = quandl.get("WIKI/AMZN")
 close = AMZN.loc[:, "Close"].tolist
@@ -29,5 +30,8 @@ rsi = RSI(close)
 rsi = rsi[14:-1] # get rid of NaN's
 change = change[15:]
 
-plt.scatter(rsi, change, color='g')
-
+plt.scatter(rsi, change, color='g', marker='.')
+plt.xlabel("RSI Value")
+plt.ylabel("Percent Change in Price Next Day")
+plt.title("RSI vs. Percent Change in AMZN Price Next Day")
+plt.show()
