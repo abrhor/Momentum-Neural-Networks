@@ -1,1 +1,35 @@
+import quandl
+from talib import RSI
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Percent change. Needed for plotting/analysis
+
+def f(first, second):    
+  ans = (second - first) * 100. / first    
+  return ans
+
+def compute(array):    
+  output = np.array([])   
+  for n, item in enumerate(array):        
+    output = np.append(output, f(array[n-1], array[n]))    
+  else:        
+    return output
+    
+AMZN = quandl.get("WIKI/AMZN")
+close = AMZN.loc[:, "Close"].tolist
+close = np.array(close)
+
+change = compute(close)
+
+rsi = RSI(close)
+
+cleanrsi = []
+cleanchange = []
+
+
+for r, c in zip(rsi, change):
+  if r > 87. or r < 21.:
+    cleanrsi.append(r)
+    cleanchange.append(c)
