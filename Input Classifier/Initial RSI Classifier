@@ -21,8 +21,7 @@ AMZN = quandl.get("WIKI/AMZN")
 close = AMZN.loc[:, "Close"].tolist
 close = np.array(close)
 
-change = np.array([])
-compute(close, change)
+change = compute(close)
 
 rsi = RSI(close)
 
