@@ -1,0 +1,28 @@
+import numpy as np
+import quandl
+import pandas as pd
+import matplotlib.pyplot as plt
+import talib as t
+
+AMZN = quandl.get("WIKI/AMZN")
+close = AMZN.loc[:, "Close"].tolist()
+close = np.array(close)
+
+rsi = t.RSI(close)[14:]
+upper, mid, lower = t.BBANDS(close)
+
+def bbwidth(upper, mid, lower):
+  width = ((upper - lower) / mid) * 100.
+  return width
+  
+bandsw = bbwidth(upper, mid, lower)
+
+plt.figure(1)
+plt.subplot(211)
+plt.hist(rsi, color='g')
+
+plt.subplot(212)
+plt.hist(bandsw, color='b')
+plt.show()
+  
+
