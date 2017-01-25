@@ -1,0 +1,4 @@
+# Summary of Results
+Distribution: Approximately normal. Mean of 52, standard deviation of 12. Suggest that anything at the 20 (downside) or 90 (upside) area indicates a likely reversion. By the empirical rule, if its at 90, we should expect a downwards move with a confidence of at least 99.7%, and the vice versa holds true if the index is at a little upwards of 16. The visualization puts a tail end at about 20, which would be confidence in an upwards move of at least 4%. 
+
+RSI Classification Attempt 1: The majority of this data falls between 30-80 (non-extreme values). 80 is up there, but there is no real significance signal unless it moves to about 87-90 on the upside and about 20 on the downside, corroborating the distribution results. Very few reliable trades available according to this.
