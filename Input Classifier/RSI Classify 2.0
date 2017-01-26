@@ -18,7 +18,7 @@ def compute(array):
     return output
     
 AMZN = quandl.get("WIKI/AMZN")
-close = AMZN.loc[:, "Close"].tolist
+close = AMZN.loc[:, "Close"].tolist()
 close = np.array(close)
 
 change = compute(close)
