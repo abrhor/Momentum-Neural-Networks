@@ -33,3 +33,8 @@ for r, c in zip(rsi, change):
   if r > 87. or r < 21.:
     cleanrsi.append(r)
     cleanchange.append(c)
+
+plt.scatter(cleanrsi, cleanchange, marker='.', color='g')
+plt.xlabel("RSI Value")
+plt.ylabel("Percent Change in Price Next Day")
+plt.title("RSI Tailheads vs. Percent Change in Price Next Day")
