@@ -25,6 +25,9 @@ change = compute(close)
 
 rsi = RSI(close)
 
+rsi = rsi[14:-1]
+change = change[15:]
+
 cleanrsi = []
 cleanchange = []
 
