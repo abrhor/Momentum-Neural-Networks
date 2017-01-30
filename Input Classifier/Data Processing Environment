@@ -30,7 +30,7 @@ class GetData(self):
     self.bbwidth = (self.upper - self.lower) / self.mid
     self.mfi = T.MFI(high=self.highs, low=self.lows, close=self.close, volume=self.volume, timeperiod=14)
    
-  def RSI_zscores(self):
+  def RSI_zscores(self): # make this algorithmic for all indicators
     numerator = self.rsi[-1] - np.nanmean(self.rsi)
     denominator = np.nanstd(self.rsi) * 3.
     return numerator / denominator
@@ -40,7 +40,7 @@ class GetData(self):
     denom = np.nanstd(self.rsi) * 3.
     score = numerator / denom
     ax = plt.scatter(score[1:], self.change[:-1])
-    clean = np.array([i for i in self.score if i > .9])
+    clean = np.array([i for i in self.score if i > .6666])
     cleanc = np.array([c for s, c in zip(self.score[1:], self.change[:-1]) if s in clean])
     return ax, list(zip(clean, cleanc))
     
