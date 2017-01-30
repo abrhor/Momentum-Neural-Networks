@@ -42,7 +42,7 @@ class GetData(self):
     ax = plt.scatter(score[1:], self.change[:-1])
     clean = np.array([i for i in self.score if i > .9])
     cleanc = np.array([c for s, c in zip(self.score[1:], self.change[:-1]) if s in clean])
-    return ax
+    return ax, list(zip(clean, cleanc))
     
   
   
