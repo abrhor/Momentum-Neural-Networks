@@ -34,4 +34,15 @@ class GetData(self):
     numerator = self.rsi[-1] - np.nanmean(self.rsi)
     denominator = np.nanstd(self.rsi) * 3.
     return numerator / denominator
+  
+  def sample_rsi(self):
+    numerator = self.rsi - np.nanmean(self.rsi)
+    denom = np.nanstd(self.rsi) * 3.
+    score = numerator / denom
+    ax = plt.scatter(score[1:], self.rsi[:- 1])
+    f = return i for i in score if 
+    return ax
+  
+  
+  
           
