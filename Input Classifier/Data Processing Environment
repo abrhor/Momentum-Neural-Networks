@@ -39,9 +39,12 @@ class GetData(self):
     numerator = self.rsi - np.nanmean(self.rsi)
     denom = np.nanstd(self.rsi) * 3.
     score = numerator / denom
-    ax = plt.scatter(score[1:], self.rsi[:- 1])
-    f = return i for i in score if 
+    ax = plt.scatter(score[1:], self.change[:-1])
+    clean = np.array([i for i in self.score if i > .9])
+    cleanc = np.array([c for s, c in zip(self.score[1:], self.change[:-1]) if s in clean])
     return ax
+    
+  
   
   
   
