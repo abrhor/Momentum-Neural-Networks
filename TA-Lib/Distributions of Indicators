@@ -1,0 +1,21 @@
+import matplotlib.pyplot as plt
+import quandl
+import pandas as pd
+import numpy
+from talib import MFI, BBANDS, RSI
+
+amzn = quandl.get("WIKI/AMZN")
+high = np.array(amzn.loc[:, "High"].tolist())
+low = np.array(amzn.loc[:, "Low"].tolist())
+close = np.array(amzn.loc[:, "Close"].tolist())
+volume = np.array(amzn.loc[:, "Volume"].tolist())
+
+upper, mid, lower = BBANDS(close)
+
+bbwidth = (upper - lower) * 100. / mid
+mfi = MFI(high=high, low=low, close=close, volume=volume, timeperiod=14)
+rsi = RSI(close)
+
+plt.hist(
+
+# fix bugs
