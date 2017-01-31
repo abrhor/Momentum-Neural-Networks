@@ -4,13 +4,13 @@ import talib as T
 import quandl
 import matplotlib.pyplot as plt
 
-class GetData(self):
+class Classifier(self):
   def __init__(self, ticker):
     self.df = quandl.get("WIKI/" + ticker)
-    self.close = np.array(self.df.loc[:, "Close"].tolist)
-    self.highs = np.array(self.df.loc[:, "High"].tolist)
-    self.lows = np.array(self.df.loc[:, "Low"].tolist)
-    self.volume = np.array(self.df.loc[:, "Volume"].tolist)
+    self.close = np.array(self.df.loc[:, "Close"].tolist())
+    self.highs = np.array(self.df.loc[:, "High"].tolist())
+    self.lows = np.array(self.df.loc[:, "Low"].tolist())
+    self.volume = np.array(self.df.loc[:, "Volume"].tolist())
   
   def percent_change(self):
     
@@ -18,13 +18,16 @@ class GetData(self):
       ans = (second - first) * 100. / first
       return ans
     
-    self.change = np.array([])
-    for n, item in enumerate(self.close):            
-      self.change = np.append(self.change, f(array[n-1], array[n]))      
-    else:  
-      return self.change
+    def compute(self):    
+      change = np.array([])
+      for n, item in enumerate(self.close):            
+        self.change = np.append(self.change, f(array[n-1], array[n]))      
+     else:  
+       return change
+     
+     self.change = self.compute()
   
-  def indicators(self):
+  def factors(self):
     self.rsi = T.RSI(self.close)[14:]
     self.upper, self.mid, self.lower = T.BBANDS(self.close)
     self.bbwidth = (self.upper - self.lower) / self.mid
