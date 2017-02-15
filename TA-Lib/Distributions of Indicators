@@ -16,6 +16,11 @@ bbwidth = (upper - lower) * 100. / mid
 mfi = MFI(high=high, low=low, close=close, volume=volume, timeperiod=14)
 rsi = RSI(close)
 
-plt.hist(
+plt.hist(rsi)
+plt.show()
 
-# fix bugs
+plt.hist(mfi)
+plt.show()
+
+plt.hist(bbwidth)
+plt.show()
