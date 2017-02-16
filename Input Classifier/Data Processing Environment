@@ -21,11 +21,11 @@ class Classifier(self):
     def compute(self):    
       change = np.array([])
       for n, item in enumerate(self.close):            
-        self.change = np.append(self.change, f(array[n-1], array[n]))      
-     else:  
+        change = np.append(change, f(array[n-1], array[n]))      
+      else:  
        return change
      
-     self.change = self.compute()
+     return self.compute()
   
   def factors(self):
     self.rsi = T.RSI(self.close)[14:]
