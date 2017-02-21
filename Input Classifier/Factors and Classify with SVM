@@ -5,12 +5,19 @@ import quandl
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-def compute_z(value, data):
-  mean = np.nanmean(data)
-  std = np.nanstd(data)
-  numerator = value - mean
-  denominator = std * 3.
-  return numerator / denominator
+def compute_z(data):
+  def one_value(value, mean, std):
+    numerator = value - mean
+    denominator = std * 3.
+    return numerator / denominator
+  def total(data):
+    output = []
+    mean = np.nanmean(data)
+    std = np.nanstd(data)
+    for i in data:
+      output.append(one_value(i, mean, std))
+    output = np.array(output)
+    return output
   
 class Classifier(self):
   def __init__(self, ticker):
