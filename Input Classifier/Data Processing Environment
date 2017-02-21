@@ -4,6 +4,13 @@ import talib as T
 import quandl
 import matplotlib.pyplot as plt
 
+def compute_z(value, data):
+  mean = np.nanmean(data)
+  std = np.nanstd(data)
+  numerator = value - mean
+  denominator = std * 3.
+  return numerator / denominator
+  
 class Classifier(self):
   def __init__(self, ticker):
     self.df = quandl.get("WIKI/" + ticker)
@@ -13,42 +20,36 @@ class Classifier(self):
     self.volume = np.array(self.df.loc[:, "Volume"].tolist())
   
   def percent_change(self):
-    
-    def f(first, second):
-      ans = (second - first) * 100. / first
-      return ans
-    
-    def compute(self):    
-      change = np.array([])
-      for n, item in enumerate(self.close):            
-        change = np.append(change, f(array[n-1], array[n]))      
-      else:  
-       return change
-     
-     return self.compute()
+    pct = self.df.pct_change()
+    close = pct.loc[:, "Close"].tolist()[1:]
+    return close
   
-  def factors(self):
-    self.rsi = T.RSI(self.close)[14:]
-    self.upper, self.mid, self.lower = T.BBANDS(self.close)
-    self.bbwidth = (self.upper - self.lower) / self.mid
-    self.mfi = T.MFI(high=self.highs, low=self.lows, close=self.close, volume=self.volume, timeperiod=14)
-   
-  def RSI_zscores(self): # make this algorithmic for all indicators
-    numerator = self.rsi[-1] - np.nanmean(self.rsi)
-    denominator = np.nanstd(self.rsi) * 3.
-    return numerator / denominator
-  
-  def sample_rsi(self):
-    numerator = self.rsi - np.nanmean(self.rsi)
-    denom = np.nanstd(self.rsi) * 3.
-    score = numerator / denom
-    ax = plt.scatter(score[1:], self.change[:-1])
-    clean = np.array([i for i in self.score if i > .6666])
-    cleanc = np.array([c for s, c in zip(self.score[1:], self.change[:-1]) if s in clean])
-    return ax, list(zip(clean, cleanc))
+  def create_factors(self):
+    def factors(self):
+      rsi = T.RSI(self.close)[14:]
+      upper, mid, lower = T.BBANDS(self.close)
+      bbands = np.array([self.upper, self.mid, self.lower])
+      bbwidth = (self.upper - self.lower) / self.mid
+      mfi = T.MFI(high=self.highs, low=self.lows, close=self.close, volume=self.volume, timeperiod=14)
+      fastk, fastd = STOCHF(self.highs, self.lows, self.close)
+      faststo = np.array([fastk, fastd])
+      return rsi, bbwidth, mfi, faststo, bbands
+    
+    def standards(self):
+      factors = list(self.factors())
+      zscores = np.array([])
+      for i in factors[:3]:
+        np.append(zscores, compute_z(factors))
+      np.append(zscores, compute_z(factors[3][2])
+      return zscores
+    
+    return self.standards()
+ 
+  def plots(self):
+    standards = np.array([i[:-1] for i in self.standards()])
+    pctchange = self.percent_change()[1:]
+    for i, j in zip(standards, standards):
+      
     
   
-  
-  
-  
-          
+      
