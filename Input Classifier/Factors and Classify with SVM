@@ -3,6 +3,7 @@ import pandas as pd
 import talib as T
 import quandl
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 def compute_z(value, data):
   mean = np.nanmean(data)
@@ -33,7 +34,7 @@ class Classifier(self):
       mfi = T.MFI(high=self.highs, low=self.lows, close=self.close, volume=self.volume, timeperiod=14)
       fastk, fastd = STOCHF(self.highs, self.lows, self.close)
       faststo = np.array([fastk, fastd])
-      return rsi, bbwidth, mfi, faststo, bbands
+      return rsi, mfi, bbwidth, faststo, bbands
     
     def standards(self):
       factors = list(self.factors())
@@ -48,7 +49,12 @@ class Classifier(self):
   def plots(self):
     standards = np.array([i[:-1] for i in self.standards()])
     pctchange = self.percent_change()[1:]
-    for i, j in zip(standards, standards):
+    x, y, z  =  standards[0], standards[1], standards[2]
+    w = percent_change()  
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d' )
+    ax.scatter(x, y, w, marker='.')
+    plt.show()
       
     
   
