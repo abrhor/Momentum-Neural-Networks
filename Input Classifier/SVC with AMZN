@@ -2,4 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import pandas as pd
-quandl
+import talib as T
+from sklearn import SVM
+import quandl
+
+amzn = quandl.get("WIKI/ADI")
+close = amzn.loc[:, "Close"].tolist()
