@@ -4,7 +4,7 @@ In order to get a qualitative feel for the probability of a mean reversion based
 I included the statistics for each distibution below (for now, all I have studied is the RSI). Check out the lPython notebook for more explanation, particularly on the statistics, and see the rest of the histograms in the folder for a visual.
 
 
-### Lag 2: P(X_t=x|x_{t-1} > 70 and x_{t-2} > 70):
+#### Lag 2: P(X_t=x|x_{t-1} > 70 and x_{t-2} > 70):
 
 N = 280
 
