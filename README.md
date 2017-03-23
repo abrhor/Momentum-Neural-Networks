@@ -1,2 +1,2 @@
-# Dependence-on-Market-Indicators
-Deep learning from a feedforward neural network of technical indicators. Inputs created with ternary classifier.
+# LSTM-Network-to-Recognize-Mean-Reversions-Against-Boosted-Feedforward
+Deep learning from an RNN and feedforward neural net of technical indicators. 
