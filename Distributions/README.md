@@ -5,8 +5,11 @@ I included the statistics for each distibution below (for now, all I have studie
 
 
 Lag 2: P(X_t=x|x_{t-1} > 70 and x_{t-2} > 70):
+
 N = 280
+
 Mean of Conditional Distribution: 74.1509402277
+
 Standard Deviation of Conditional Distribution: 6.12820741798
 
 Kullback-Leibler (KL) Divergence of Conditional Distribution and Sample Distribution: 0.0298529967765
