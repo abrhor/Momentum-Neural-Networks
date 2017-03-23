@@ -1,10 +1,10 @@
-## Distribution Studies
+# Distribution Studies
 In order to get a qualitative feel for the probability of a mean reversion based off the network features (i.e. momentum indicators), we need to look at the distributions of each, and perhaps joint distributions. This will give me a better picture of what my strategy entails and what the algorithm will have to learn.
 
 I included the statistics for each distibution below (for now, all I have studied is the RSI). Check out the lPython notebook for more explanation, particularly on the statistics, and see the rest of the histograms in the folder for a visual.
 
 
-Lag 2: P(X_t=x|x_{t-1} > 70 and x_{t-2} > 70):
+## Lag 2: P(X_t=x|x_{t-1} > 70 and x_{t-2} > 70):
 
 N = 280
 
