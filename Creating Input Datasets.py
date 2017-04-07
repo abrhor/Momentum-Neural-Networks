@@ -36,9 +36,9 @@ class DataGenerator(object):
         pct = self.df.pct_change()
         close = pct.loc[:, "Close"].tolist()[1:]
         return close
-  
+ # need multiple datasets at each time step. momentum, volume, etc. for different NNs
     def create_factors(self):
-        def factors():
+        def factors(): # Get rid of stochastics. Get other stuff
             rsi = T.RSI(self.close)
             upper, mid, lower = T.BBANDS(self.close)
             bbwidth = (upper - lower) / mid
@@ -46,13 +46,14 @@ class DataGenerator(object):
             fastk, fastd = T.STOCHF(self.highs, self.lows, self.close)
             return rsi[14:], mfi[14:], bbwidth[4:], fastk[6:], fastd[6:]
         return factors()
+    # Make all from [14:] Can't do anything with partial data
     
     def z_scores(self): # note you make an assumption in using a constant mean/std.
         factors = self.create_factors()
         rsi_z, mfi_z, bbwidth_z, fastk_z, fastd_z = compute_z(factors[0]), compute_z(factors[1]), compute_z(factors[2]), compute_z(factors[3]), compute_z(factors[4])
         return rsi_z, mfi_z, bbwidth_z, fastk_z, fastd_z
     
-    def generate_datasets(self):
+    def generate_datasets(self): # Dont do this. Just nto an array with an sub-array for each time step
         rsi_z, mfi_z, bbwidth_z, fastk_z, fastd_z = self.z_scores()
         datasets = {}
         N = len(self.close) - 14
