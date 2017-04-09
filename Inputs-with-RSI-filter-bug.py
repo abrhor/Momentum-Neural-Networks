@@ -66,7 +66,6 @@ class DataGenerator(object):
         
     
 
-
 example = DataGenerator("TSLA")
 
 x = example.generate_input_datasets()
